@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Steadwell — Learn. Make. Become.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1A3C5E;
+      --gold:   #C9AA71;
+      --accent: #2E75B6;
+      --bg:     #F7F4EF;
+      --body:   #4A4A4A;
+      --rule:   #D8D2C8;
+      --white:  #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      background: var(--bg);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-color: var(--rule); }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--body);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 96px 32px;
+    }
+
+    section + section {
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding-top: 180px;
+      padding-bottom: 96px;
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 48px;
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 8vw, 80px);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+
+    .hero-headline .word {
+      display: block;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    .hero-headline .word:nth-child(1) { animation-delay: 0.1s; }
+    .hero-headline .word:nth-child(2) { animation-delay: 0.25s; }
+    .hero-headline .word:nth-child(3) { animation-delay: 0.4s; }
+
+    .hero-rule {
+      display: block;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      margin: 28px 0;
+      animation: growRule 0.8s ease 0.7s forwards;
+    }
+
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 2.5vw, 22px);
+      font-style: italic;
+      color: var(--navy);
+      opacity: 0.7;
+      margin-top: 8px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.8s forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes growRule {
+      to { width: 64px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-headline .word,
+      .hero-sub { opacity: 1; transform: none; animation: none; }
+      .hero-rule { width: 64px; animation: none; }
+    }
+
+    /* ── BELIEF ── */
+    .belief-statement {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--navy);
+      margin-bottom: 32px;
+    }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    /* ── HEADINGS ── */
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin-bottom: 20px;
+      color: var(--body);
+    }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── PRODUCT CARD ── */
+    .product-card {
+      background: var(--white);
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+      padding: 40px;
+      margin-top: 40px;
+    }
+
+    .product-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    /* ── COMING SOON ITEMS ── */
+    .coming-soon-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .coming-soon-item {
+      border-left: 2px solid var(--gold);
+      padding-left: 20px;
+    }
+
+    .coming-soon-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .coming-soon-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--body);
+      opacity: 0.8;
+      margin: 0;
+    }
+
+    /* ── FOUNDER ── */
+    .founder-sig {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--navy);
+      margin-top: 32px;
+      opacity: 0.8;
+    }
+
+    /* ── WAITLIST ── */
+    .waitlist-form {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .waitlist-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 14px 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: var(--bg);
+      color: var(--navy);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .waitlist-input:focus { border-color: var(--accent); }
+    .waitlist-input::placeholder { color: #999; }
+
+    .waitlist-btn {
+      padding: 14px 28px;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .waitlist-btn:hover { background: var(--accent); }
+
+    .waitlist-note {
+      font-size: 13px;
+      color: var(--body);
+      opacity: 0.6;
+      margin-top: 12px;
+      margin-bottom: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 100%;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .footer-meta {
+      font-size: 13px;
+      color: var(--body);
+      opacity: 0.5;
+      text-align: right;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      nav { padding: 16px 24px; }
+      nav .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      .hero { padding-top: 140px; }
+      .coming-soon-grid { grid-template-columns: 1fr; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a class="nav-logo" href="#">Steadwell</a>
+    <ul class="nav-links">
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#langly">Langly</a></li>
+      <li><a href="#founder">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Steadwell · Washington, DC</p>
+    <h1 class="hero-headline" aria-label="Learn. Make. Become.">
+      <span class="word">Learn.</span>
+      <span class="word">Make.</span>
+      <span class="word">Become.</span>
+    </h1>
+    <span class="hero-rule" aria-hidden="true"></span>
+    <p class="hero-sub">Steadwell builds tools for a life well-lived.</p>
+  </section>
+
+  <!-- BELIEF -->
+  <section id="belief">
+    <p class="belief-statement">The best life is a passionate one.</p>
+    <p>We live in a moment that makes passion harder to act on. The pace is relentless. The tools that were supposed to free us have made whole fields of human expertise feel obsolete overnight. And somewhere in the noise, the question of what you actually want — what you'd pursue if the path were clear — gets harder to hear.</p>
+    <p>Steadwell exists to help you hear it. And then to help you act on it.</p>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach">
+    <p class="section-label">Our Approach</p>
+    <h2>Technology that makes you more yourself.</h2>
+    <p>Every Steadwell product is grounded in how people actually learn and grow — not in what's fastest or most automated, but in what produces real, lasting change in real human beings.</p>
+    <p>We're students of learning science, positive psychology, and the kind of deep expertise that only comes from sustained, deliberate practice. We build tools that meet you where you are, take your goals seriously, and stay out of the way when you don't need them.</p>
+    <p>This is the opposite of outsourcing yourself to a machine. It's using technology to become more fully who you are.</p>
+  </section>
+
+  <!-- LANGLY -->
+  <section id="langly">
+    <p class="section-label">Our First Product</p>
+    <h2>Language is one of the most human things there is.</h2>
+    <p>It connects us to places, to people, to versions of ourselves we haven't become yet. The best way to learn a language isn't in a classroom — it's in the world, in the places where that language lives and breathes.</p>
+
+    <div class="product-card">
+      <p class="product-label">Now in Development · Washington, DC</p>
+      <p class="product-name">Langly</p>
+      <p>Langly helps language learners and newcomers find real-world immersion opportunities close to home — the coffee shop where Spanish flows, the market where Mandarin fills the air, the neighborhood where English feels welcoming.</p>
+      <p>It's a mobile app for discovering the living language of your city, built on the belief that the best classroom is the world around you.</p>
+
+      <div class="waitlist-form">
+        <input class="waitlist-input" type="email" placeholder="your@email.com" aria-label="Email address" />
+        <button class="waitlist-btn" type="button">Join the waitlist</button>
+      </div>
+      <p class="waitlist-note">Launching first in Washington, DC. No spam, ever.</p>
+    </div>
+  </section>
+
+  <!-- COMING SOON -->
+  <section id="coming">
+    <p class="section-label">What's Coming</p>
+    <h2>The beginning of something larger.</h2>
+    <p>Langly is the first expression of a broader platform for people who want to grow intentionally — to learn deeply, make beautifully, and become more fully themselves.</p>
+
+    <div class="coming-soon-grid">
+      <div class="coming-soon-item">
+        <p class="coming-soon-name">Luminary</p>
+        <p class="coming-soon-desc">Become a genuine expert in any knowledge domain. Structured, reflective, and cumulative — the way experts actually learn.</p>
+      </div>
+      <div class="coming-soon-item">
+        <p class="coming-soon-name">Artisan</p>
+        <p class="coming-soon-desc">Master a physical craft — pottery, calligraphy, woodworking — with intelligent guidance, real feedback, and a community that takes craft seriously.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section id="founder">
+    <p class="section-label">Who We Are</p>
+    <h2>Built by someone who needed it.</h2>
+    <p>I started coding in high school, studied linguistics in college, and spent years afterward translating and analyzing language professionally — work I loved until I didn't. What I'd cherished about language was the learning, the meaning-making, the art of expression. When that work became a race against machines, the art disappeared. I still loved software, so I refreshed my skills and made the switch. It's been genuinely good — I enjoy solving problems, and I'm decent at it.</p>
+    <p>But AI is coming for that too. And honestly, when I look at what I actually care about — what I'd pursue if the path were clear — it's learning, growth, and the craft of becoming more fully yourself. That's what led me here.</p>
+    <p>Steadwell is my attempt to build something at the intersection of all of it: tools grounded in how people actually learn, designed for people who want to grow rather than be replaced, made with the care that meaningful work deserves. I build these apps because I need them. That's where every Steadwell product starts.</p>
+    <p class="founder-sig">— Joseph Marulli, Founder · Washington, DC</p>
+  </section>
+
+  <footer>
+    <span class="footer-logo">Steadwell</span>
+    <span class="footer-meta">steadwell.tech · Washington, DC<br>Tools for learning, language, and belonging.</span>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    document.querySelector('.waitlist-btn').addEventListener('click', () => {
+      const input = document.querySelector('.waitlist-input');
+      const email = input.value.trim();
+      if (!email || !email.includes('@')) {
+        input.style.borderColor = '#c0392b';
+        input.focus();
+        return;
+      }
+      input.style.borderColor = '';
+      const btn = document.querySelector('.waitlist-btn');
+      btn.textContent = 'You\'re on the list.';
+      btn.style.background = '#2d6a4f';
+      btn.disabled = true;
+      input.disabled = true;
+    });
+  </script>
+
+</body>
+</html>
